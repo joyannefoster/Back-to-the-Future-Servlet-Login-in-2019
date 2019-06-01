@@ -64,7 +64,10 @@ class AuthenticationLambdaServlet extends HttpServlet {
 
         try {
             renderConsumer.service(req, resp);
-        } catch (AuthenticationException | ResourceException e) {
+        } catch (ResourceException e) {
+            req.setAttribute("error", e);
+            forward("/WEB-INF/jsp/authn/login.jsp", req, resp);
+        } catch (AuthenticationException e) {
             req.setAttribute("error", e);
             forward("/WEB-INF/jsp/authn/login.jsp", req, resp);
         }
@@ -80,11 +83,17 @@ class AuthenticationLambdaServlet extends HttpServlet {
 
         try {
             postConsumer.service(req, resp);
-        } catch (AuthenticationException | ResourceException e) {
+        } catch (AuthenticationException  e) {
 
             // on error, set the error attribute then render the page again
             req.setAttribute("error", e);
             doGet(req, resp);
+        } catch (ResourceException e) {
+
+            // on error, set the error attribute then render the page again
+            req.setAttribute("error", e);
+            doGet(req, resp);
+
         }
     }
 

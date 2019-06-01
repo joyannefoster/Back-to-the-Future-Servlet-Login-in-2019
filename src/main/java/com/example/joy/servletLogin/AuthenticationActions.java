@@ -23,8 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.okta.authn.sdk.AuthenticationException;
 import com.okta.authn.sdk.client.AuthenticationClient;
-import com.okta.authn.sdk.resource.AuthenticationResponse;
-import com.okta.authn.sdk.resource.VerifyRecoveryRequest;
 import com.okta.sdk.resource.user.factor.FactorType;
 
 /**
@@ -32,7 +30,7 @@ import com.okta.sdk.resource.user.factor.FactorType;
  */
 class AuthenticationActions {
 
-    static final String PREVIOUS_AUTHN_RESULT = AuthenticationResponse.class.getName();
+    
 
     private final AuthenticationClient authenticationClient;
 
@@ -62,20 +60,7 @@ class AuthenticationActions {
         response.sendRedirect("/authn/login");
     }
 
-    /**
-     * /authn/change-password
-     */
-    void changePassword(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
-        String oldPassword = request.getParameter("oldPassword");
-        String newPassword = request.getParameter("newPassword");
-
-        authenticationClient.changePassword(oldPassword.toCharArray(),
-                                            newPassword.toCharArray(),
-                                            getPreviousAuthResult(request).getStateToken(),
-                                            new ExampleAuthenticationStateHandler(request, response));
-    }
-
+    
     /**
      * /authn/forgot-password
      */
@@ -88,14 +73,12 @@ class AuthenticationActions {
 
   
 
-    private AuthenticationResponse getPreviousAuthResult(HttpServletRequest request) {
-        return (AuthenticationResponse) request.getSession(true).getAttribute(PREVIOUS_AUTHN_RESULT);
-    }
-
     static void forward(String path, HttpServletRequest request, HttpServletResponse response) {
         try {
             request.getRequestDispatcher(path).forward(request, response);
-        } catch (ServletException | IOException e) {
+        } catch (ServletException e) {
+            throw new IllegalStateException("Unable to forward to path: "+ path, e);
+        } catch (IOException e) {
             throw new IllegalStateException("Unable to forward to path: "+ path, e);
         }
     }

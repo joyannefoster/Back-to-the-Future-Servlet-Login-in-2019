@@ -37,10 +37,8 @@ public class OktaFilter implements Filter {
 
     static final String USER_SESSION_KEY = User.class.getName();
 
-    @Override
     public void init(FilterConfig filterConfig) {}
 
-    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) req;
@@ -64,7 +62,6 @@ public class OktaFilter implements Filter {
         response.sendRedirect("/authn/login");
     }
 
-    @Override
     public void destroy() {}
 
     private boolean isAuthenticated(HttpServletRequest request) {

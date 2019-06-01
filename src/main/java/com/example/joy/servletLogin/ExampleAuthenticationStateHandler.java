@@ -31,6 +31,8 @@ import java.util.Locale;
  */
 class ExampleAuthenticationStateHandler extends AuthenticationStateHandlerAdapter {
 
+    static final String PREVIOUS_AUTHN_RESULT = AuthenticationResponse.class.getName();
+    
     private final HttpServletRequest request;
     private final HttpServletResponse response;
 
@@ -55,7 +57,6 @@ class ExampleAuthenticationStateHandler extends AuthenticationStateHandlerAdapte
 
     
 
-    @Override
     public void handleUnknown(AuthenticationResponse unknownResponse) {
         redirect("/authn/login?error=Unsupported State: "+ unknownResponse.getStatus().name(), unknownResponse);
     }
@@ -70,6 +71,6 @@ class ExampleAuthenticationStateHandler extends AuthenticationStateHandlerAdapte
     }
 
     private void setAuthNResult(AuthenticationResponse authenticationResponse) {
-        request.getSession(true).setAttribute(AuthenticationActions.PREVIOUS_AUTHN_RESULT, authenticationResponse);
+        request.getSession(true).setAttribute(ExampleAuthenticationStateHandler.PREVIOUS_AUTHN_RESULT, authenticationResponse);
     }
 }

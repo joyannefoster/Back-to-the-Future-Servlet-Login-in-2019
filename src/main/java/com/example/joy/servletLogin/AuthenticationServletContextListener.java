@@ -33,7 +33,6 @@ public class AuthenticationServletContextListener implements ServletContextListe
 
     private AuthenticationActions actions;
 
-    @Override
     public void contextInitialized(ServletContextEvent sce) {
 
         // configuration can be pulled from various sources, see https://github.com/okta/okta-auth-java#configuration-reference
@@ -49,11 +48,9 @@ public class AuthenticationServletContextListener implements ServletContextListe
 
         registerAction(servletContext, "/authn/login","/WEB-INF/jsp/authn/login.jsp", actions::login);
         registerAction(servletContext, "/authn/logout", (String) null, actions::logout);
-        registerAction(servletContext, "/authn/change-password","/WEB-INF/jsp/authn/change-password.jsp", actions::changePassword);
         registerAction(servletContext, "/authn/forgot-password", "/WEB-INF/jsp/authn/forgot-password.jsp", actions::forgotPassword);
     }
-
-    @Override
+    
     public void contextDestroyed(ServletContextEvent sce) {
         actions = null;
     }
