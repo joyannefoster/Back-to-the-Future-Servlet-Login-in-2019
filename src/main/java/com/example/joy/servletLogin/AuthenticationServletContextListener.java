@@ -30,14 +30,14 @@ import java.util.EnumSet;
 
 @WebListener
 public class AuthenticationServletContextListener implements ServletContextListener {
-
+    private String ORG_URL = "https://{yourOktaDomain}";
     private AuthenticationActions actions;
 
     public void contextInitialized(ServletContextEvent sce) {
 
         // configuration can be pulled from various sources, see https://github.com/okta/okta-auth-java#configuration-reference
         AuthenticationClient authenticationClient = AuthenticationClients.builder()
-                .setOrgUrl("https://dev-819884.okta.com")
+                .setOrgUrl(ORG_URL)
                 .build();
 
 
