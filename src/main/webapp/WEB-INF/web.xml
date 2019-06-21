@@ -2,7 +2,17 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     version="2.5">
     <display-name>JSP Example Application</display-name>
- 
+ <!-- 
+    <context-param>  
+      <param-name>orgUrl</param-name>  
+      <param-value>https://{yourOktaDomain}</param-value>  
+    </context-param>  
+     -->
+    <context-param>  
+      <param-name>orgUrl</param-name>  
+      <param-value>https://dev-819884.okta.com</param-value>  
+    </context-param>  
+    
     <listener>
     <listener-class>
              com.example.joy.servletLogin.AuthenticationServletContextListener 

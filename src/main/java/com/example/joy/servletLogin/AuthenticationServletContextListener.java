@@ -30,14 +30,14 @@ import java.util.EnumSet;
 
 @WebListener
 public class AuthenticationServletContextListener implements ServletContextListener {
-    private String ORG_URL = "https://{yourOktaDomain}";
+    ;
     private AuthenticationActions actions;
 
     public void contextInitialized(ServletContextEvent sce) {
 
         // configuration can be pulled from various sources, see https://github.com/okta/okta-auth-java#configuration-reference
         AuthenticationClient authenticationClient = AuthenticationClients.builder()
-                .setOrgUrl(ORG_URL)
+                .setOrgUrl(sce.getServletContext().getInitParameter("orgUrl"))
                 .build();
 
 
@@ -46,9 +46,8 @@ public class AuthenticationServletContextListener implements ServletContextListe
         ServletContext servletContext = sce.getServletContext();
         registerFilter(servletContext, "/*", new OktaFilter());
 
-        registerAction(servletContext, "/authn/login","/WEB-INF/jsp/authn/login.jsp", actions::login);
-        registerAction(servletContext, "/authn/logout", (String) null, actions::logout);
-        registerAction(servletContext, "/authn/forgot-password", "/WEB-INF/jsp/authn/forgot-password.jsp", actions::forgotPassword);
+        registerAction(servletContext, "/authn/login","/WEB-INF/jsp/authn/login.jsp", (request,response)->{actions.login(request, response);});
+        registerAction(servletContext, "/authn/logout", (String) null, (request,response)->{actions.logout(request, response);});
     }
     
     public void contextDestroyed(ServletContextEvent sce) {

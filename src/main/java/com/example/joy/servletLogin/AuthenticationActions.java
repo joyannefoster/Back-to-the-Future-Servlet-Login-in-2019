@@ -58,20 +58,7 @@ class AuthenticationActions {
             request.getSession().invalidate();
         }
         response.sendRedirect("/authn/login");
-    }
-
-    
-    /**
-     * /authn/forgot-password
-     */
-    void forgotPassword(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
-        String username = request.getParameter("username");
-        String factorType = request.getParameter("factor");
-        authenticationClient.recoverPassword(username, FactorType.valueOf(factorType), "/?breaking-the-law", new ExampleAuthenticationStateHandler(request, response));
-    }
-
-  
+    }    
 
     static void forward(String path, HttpServletRequest request, HttpServletResponse response) {
         try {

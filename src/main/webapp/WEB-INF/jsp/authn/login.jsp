@@ -40,7 +40,6 @@
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
                         </fieldset>
                         </form>
-                        <a class="pull-right" href="/authn/forgot-password">Forgot Password?</a>
                     </div>
                 </div>
             </div>
