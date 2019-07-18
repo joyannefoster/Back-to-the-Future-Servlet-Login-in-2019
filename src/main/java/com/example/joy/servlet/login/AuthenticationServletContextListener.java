@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.joy.servletLogin;
+package com.example.joy.servlet.login;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -22,9 +22,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.example.joy.servlet.login.AuthenticationLambdaServlet.AuthenticationServletHandler;
 import com.okta.authn.sdk.client.AuthenticationClient;
 import com.okta.authn.sdk.client.AuthenticationClients;
-import com.example.joy.servletLogin.AuthenticationLambdaServlet.AuthenticationServletHandler;
 
 import java.util.EnumSet;
 
@@ -46,8 +46,8 @@ public class AuthenticationServletContextListener implements ServletContextListe
         ServletContext servletContext = sce.getServletContext();
         registerFilter(servletContext, "/*", new OktaFilter());
 
-        registerAction(servletContext, "/authn/login","/WEB-INF/jsp/authn/login.jsp", (request,response)->{actions.login(request, response);});
-        registerAction(servletContext, "/authn/logout", (String) null, (request,response)->{actions.logout(request, response);});
+        registerAction(servletContext, "/authn/login","/WEB-INF/jsp/authn/login.jsp", (request,response)->actions.login(request, response));
+        registerAction(servletContext, "/authn/logout", (String) null, (request,response)->actions.logout(request, response));
     }
     
     public void contextDestroyed(ServletContextEvent sce) {

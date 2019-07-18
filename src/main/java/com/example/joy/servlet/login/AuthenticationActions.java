@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.joy.servletLogin;
+package com.example.joy.servlet.login;
 
 import java.io.IOException;
 
@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.okta.authn.sdk.AuthenticationException;
 import com.okta.authn.sdk.client.AuthenticationClient;
-import com.okta.sdk.resource.user.factor.FactorType;
 
 /**
  * This class contains logic needed to collect and display JSPs in order to advance a user through <a href="https://developer.okta.com/docs/api/resources/authn#transaction-state">Okta's Authentication State Machine</a>.
@@ -63,10 +62,8 @@ class AuthenticationActions {
     static void forward(String path, HttpServletRequest request, HttpServletResponse response) {
         try {
             request.getRequestDispatcher(path).forward(request, response);
-        } catch (ServletException e) {
-            throw new IllegalStateException("Unable to forward to path: "+ path, e);
-        } catch (IOException e) {
-            throw new IllegalStateException("Unable to forward to path: "+ path, e);
+        } catch (ServletException | IOException e) {
+            throw new IllegalStateException("Unable to forward to path: "+ path, e);        
         }
     }
 }

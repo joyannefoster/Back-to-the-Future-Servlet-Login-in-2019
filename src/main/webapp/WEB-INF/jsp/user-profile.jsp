@@ -15,11 +15,11 @@
   ~ limitations under the License.
 
   --%>
-<jsp:include page="/WEB-INF/jsp/includes/header.jsp" />
+<jsp:include page="./includes/header.jsp" />
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <body id="samples">
-    <jsp:include page="/WEB-INF/jsp/includes/menu.jsp" />
+    <jsp:include page="./includes/menu.jsp" />
 
     <div id="content" class="container">
 
@@ -46,4 +46,4 @@
     </div>
 </body>
 
-<jsp:include page="/WEB-INF/jsp/includes/footer.jsp" />
+<jsp:include page="./includes/footer.jsp" />

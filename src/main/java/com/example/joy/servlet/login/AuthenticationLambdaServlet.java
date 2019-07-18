@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.joy.servletLogin;
+package com.example.joy.servlet.login;
 
 import com.okta.authn.sdk.AuthenticationException;
 import com.okta.sdk.resource.ResourceException;
@@ -22,9 +22,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-import static com.example.joy.servletLogin.AuthenticationActions.forward;
+import static com.example.joy.servlet.login.AuthenticationActions.forward;
+
+import java.io.IOException;
 
 /**
  * Boiler plate code reduction to help make this sample project easier to
